@@ -1,0 +1,30 @@
+{
+  "name": "macroarg.c",
+  "version": "1.2016.0",
+  "description": "Manage arguments of macros in C; Subhajit Sahu (2016).",
+  "keywords": [
+    "c",
+    "library",
+    "header-only",
+    "macro",
+    "preprocessor",
+    "variadic",
+    "argument",
+    "count",
+    "manipulate"
+  ],
+  "homepage": "https://github.com/nodef/macroarg.c#readme",
+  "bugs": {
+    "url": "https://github.com/nodef/macroarg.c/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodef/macroarg.c.git"
+  },
+  "license": "MIT",
+  "author": "wolfram77@gmail.com",
+  "main": "macroarg.h",
+  "scripts": {
+    "test": "bash build.sh test"
+  }
+}
