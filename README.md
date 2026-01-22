@@ -1,158 +1,135 @@
-Manage arguments of macros in C.
-> Download: [header file](https://github.com/cppf/extra-macroarg/raw/master/main.h).
+This library provides macros to manipulate variable arguments (variadic macros) in C, such as getting specific arguments, counting arguments, merging arguments, and the like.
 
 
-### get
+## Examples
 
 ```c
 // Get nth argument.
-EMA_GET<N>(args)
-```
+- MACROARG_GET<N>(args)
 
-```c
-// get index 0 (first) argument
-printf("EMA_GET0(a0, a1, a2): %s.\n", EMA_GET0("a0", "a1", "a2"));
+// Get index 0 (first) argument
+printf("MACROARG_GET0(a0, a1, a2): %s.\n", MACROARG_GET0("a0", "a1", "a2"));
 
-// get max of 3 values using variable argument (variadic) macro
-#define MAX2(A, B) ((a)>(b)? (a) : (b))
+// Get max of 3 values using variable argument (variadic) macro
+#define MAX2(A, B)    ((a)>(b)? (a) : (b))
 #define MAX3(A, B, C) MAX2(MAX2(A, B), C)
-#define MAX(...) EMA_GET0(EMA_GET3(__VA_ARGS__, MAX3, MAX2)(__VA_ARGS__))
+#define MAX(...)      MACROARG_GET0(MACROARG_GET3(__VA_ARGS__, MAX3, MAX2)(__VA_ARGS__))
 printf("MAX(7, 1, 2): %d.\n", MAX(7, 1, 2));
 ```
 
-
-### count
-
 ```c
 // Count number of arguments.
-EMA_COUNT(args)
+- MACROARG_COUNT(args)
+
+printf("MACROARG_COUNT(3, 5, 2, 3): %d.\n", MACROARG_COUNT(3, 5, 2, 3));
 ```
-
-```c
-printf("EMA_COUNT(3, 5, 2, 3): %d.\n", EMA_COUNT(3, 5, 2, 3));
-```
-
-
-### geteven
 
 ```c
 // Get even index arguments.
-EMA_GETEVEN(args)
+- MACROARG_GETEVEN(args)
+
+printf("MACROARG_GETEVEN(7, 1, 2, 3): %d, %d.\n", MACROARG_GETEVEN(7, 1, 2, 3));
 ```
-
-```c
-printf("EMA_GETEVEN(7, 1, 2, 3): %d, %d.\n", EMA_GETEVEN(7, 1, 2, 3));
-```
-
-
-### getodd
 
 ```c
 // Get odd index arguments.
-EMA_GETODD(args)
-```
+- MACROARG_GETODD(args)
 
+printf("MACROARG_GETODD(7, 1, 2, 3): %d, %d.\n", MACROARG_GETODD(7, 1, 2, 3));
 ```
-printf("EMA_GETODD(7, 1, 2, 3): %d, %d.\n", EMA_GETODD(7, 1, 2, 3));
-```
-
-
-### prefix
 
 ```c
 // Prefix all arguments with a value.
-EMA_PREFIX(value, args)
+- MACROARG_PREFIX(value, args)
+
+printf("MACROARG_PREFIX(7, 1, 2, 3): %d, %d, %d.\n", MACROARG_PREFIX(7, 1, 2, 3));
 ```
-
-```c
-printf("EMA_PREFIX(7, 1, 2, 3): %d, %d, %d.\n", EMA_PREFIX(7, 1, 2, 3));
-```
-
-
-### postfix
 
 ```c
 // Postfix all arguments with a value.
-EMA_POSTFIX(value, args)
+- MACROARG_POSTFIX(value, args)
+
+printf("MACROARG_POSTFIX(7, 1, 2, 3): %d, %d, %d.\n", MACROARG_POSTFIX(7, 1, 2, 3));
 ```
-
-```c
-printf("EMA_POSTFIX(7, 1, 2, 3): %d, %d, %d.\n", EMA_POSTFIX(7, 1, 2, 3));
-```
-
-
-### merge
 
 ```c
 // Merge all arguments.
-EMA_MERGE(args)
+- MACROARG_MERGE(args)
+
+printf("MACROARG_MERGE(7, 1, 2, 3): %d.\n", MACROARG_MERGE(7, 1, 2, 3));
 ```
-
-```c
-printf("EMA_MERGE(7, 1, 2, 3): %d.\n", EMA_MERGE(7, 1, 2, 3));
-```
-
-
-### mergepair
 
 ```c
 // Merge all arguments pairs.
-EMA_MERGEPAIR(args)
+- MACROARG_MERGEPAIR(args)
+
+printf("MACROARG_MERGEPAIR(7, 1, 2, 3): %d, %d.\n", MACROARG_MERGEPAIR(7, 1, 2, 3));
 ```
-
-```c
-printf("EMA_MERGEPAIR(7, 1, 2, 3): %d, %d.\n", EMA_MERGEPAIR(7, 1, 2, 3));
-```
-
-
-### join
 
 ```c
 // Join all arguments, with separator.
-EMA_JOIN(separator, args)
+- MACROARG_JOIN(separator, args)
+
+printf("MACROARG_JOIN(7, 1, 2, 3): %d.\n", MACROARG_JOIN(7, 1, 2, 3));
 ```
-
-```c
-printf("EMA_JOIN(7, 1, 2, 3): %d.\n", EMA_JOIN(7, 1, 2, 3));
-```
-
-
-### joinpair
 
 ```c
 // Join all argument pairs, with separator.
-EMA_JOINPAIR(separator, args)
+- MACROARG_JOINPAIR(separator, args)
+
+printf("MACROARG_JOINPAIR(7, 1, 2, 3): %d, %d.\n", MACROARG_JOINPAIR(7, 1, 2, 3));
 ```
-
-```c
-printf("EMA_JOINPAIR(7, 1, 2, 3): %d, %d.\n", EMA_JOINPAIR(7, 1, 2, 3));
-```
-
-
-### space
 
 ```c
 // Space arguments, a character apart.
-EMA_SPACE(args)
+- MACROARG_SPACE(args)
+
+printf("MACROARG_SPACE(h, b, c, d): %s.\n", MACROARG_SPACE("h", "b", "c", "d"));
 ```
-
-```c
-printf("EMA_SPACE(h, b, c, d): %s.\n", EMA_SPACE("h", "b", "c", "d"));
-```
-
-
-### spacepair
 
 ```c
 // Space argument pairs, a character apart.
-EMA_SPACEPAIR(args)
+- MACROARG_SPACEPAIR(args)
+
+printf("MACROARG_SPACEPAIR(h, b, c, d): %s, %s.\n", MACROARG_SPACEPAIR("h", "b", "c", "d"));
 ```
+
+
+## Installation
+
+Run:
+
+```bash
+$ npm i macroarg.c
+```
+
+And then include `macroarg.h` as follows:
 
 ```c
-printf("EMA_SPACEPAIR(h, b, c, d): %s, %s.\n", EMA_SPACEPAIR("h", "b", "c", "d"));
+// main.c
+#include <macroarg.h>
+
+int main() { /* ... */ }
 ```
-<br><br>
+
+Finally, compile while adding the path `node_modules/macroarg.c` to your compiler's include paths.
+
+```bash
+$ clang -I./node_modules/macroarg.c main.c  # or, use gcc
+$ gcc   -I./node_modules/macroarg.c main.c
+```
+
+You may also use a simpler approach with the [cpoach](https://www.npmjs.com/package/cpoach.sh) tool, which automatically adds the necessary include paths of all the installed dependencies for your project.
+
+```bash
+$ cpoach clang main.c  # or, use gcc
+$ cpoach gcc   main.c
+```
+
+<br>
+<br>
 
 
-[![cppf](https://i.imgur.com/NVwgyFV.jpg)](https://cppf.github.io)
-![](https://ga-beacon.deno.dev/G-RC63DPBH3P:SH3Eq-NoQ9mwgYeHWxu7cw/github.com/nodef/extra-macroarg.cxx)
+[![](https://raw.githubusercontent.com/qb40/designs/gh-pages/0/image/11.png)](https://wolfram77.github.io)<br>
+[![ORG](https://img.shields.io/badge/org-nodef-green?logo=Org)](https://nodef.github.io)
+![](https://ga-beacon.deno.dev/G-RC63DPBH3P:SH3Eq-NoQ9mwgYeHWxu7cw/github.com/nodef/macroarg.c)
