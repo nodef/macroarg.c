@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "macroarg.h"
+#include <macroarg.h>
 
 
-// define variadic macro for max
+// Define variadic macro for max
 #define MAX2(A, B) ((A)>(B)? (A) : (B))
 #define MAX3(A, B, C) MAX2(MAX2(A, B), C)
 #define MAX(...) MACROARG_GET0(MACROARG_GET3(__VA_ARGS__, MAX3, MAX2)(__VA_ARGS__))
